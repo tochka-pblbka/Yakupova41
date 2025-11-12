@@ -23,6 +23,8 @@ namespace Yakupova41
         public ProductPage()
         {
             InitializeComponent();
+            var currentProducts = Yakupova41Entities.GetContext().Product.ToList();
+            ProductListView.ItemsSource = currentProducts;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
