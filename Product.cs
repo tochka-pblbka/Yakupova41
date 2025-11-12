@@ -39,7 +39,7 @@ namespace Yakupova41
             {
                 if (ProductPhoto == null)
                     return null;
-                    return "Товар_import/" + ProductPhoto;
+                return "Товар_import/" + ProductPhoto;
             }
         }
 

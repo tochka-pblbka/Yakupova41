@@ -17,6 +17,7 @@ namespace Yakupova41
     
     public partial class Yakupova41Entities : DbContext
     {
+
         private static Yakupova41Entities _context;
         public static Yakupova41Entities GetContext()
         {
@@ -25,7 +26,6 @@ namespace Yakupova41
 
             return _context;
         }
-
         public Yakupova41Entities()
             : base("name=Yakupova41Entities")
         {

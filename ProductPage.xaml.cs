@@ -31,5 +31,20 @@ namespace Yakupova41
         {
             Manager.MainFrame.Navigate(new AddEdit());
         }
+
+        private void TBSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TBSearch_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void ComboType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
