@@ -9,16 +9,26 @@
       Title="ProductPage"  FontFamily="Comic Sans MS">
 
     <Grid>
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+
         </Grid.RowDefinitions>
-        <WrapPanel Orientation = "Horizontal" HorizontalAlignment = "Center">
+        <StackPanel Orientation="Horizontal" Margin="10">
+            <TextBlock Text="Вы авторизованы как " HorizontalAlignment="Left" FontSize="15"/>
+            <TextBlock x:Name="fioTB" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="15"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="10">
+            <TextBlock Text="Роль: " Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" RenderTransformOrigin="0.499,0.97"></TextBlock>
+            <TextBlock Name="RoleTB" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"></TextBlock>
+        </StackPanel>
+
+        <WrapPanel Orientation = "Horizontal" HorizontalAlignment = "Center" Grid.Row="1">
             <StackPanel Orientation = "Vertical" Margin = "10">
-                <TextBlock Text = "поиск по имени" TextAlignment = "Left" Width = "300" FontSize = "20"></TextBlock>
-                <TextBox Name = "TBSearch" TextChanged = "TBSearch_TextChanged" Width = "300" FontSize = "15"></TextBox>
+                <TextBlock Text = "поиск по имени" TextAlignment = "Left" Width = "220" FontSize = "20"/>
+                <TextBox x:Name = "TBSearch" TextChanged = "TBSearch_TextChanged" Width = "218" FontSize = "15"/>
             </StackPanel>
             <StackPanel Orientation = "Vertical" Margin = "10">
                 <TextBlock Text = "фильтрация по скидке" TextAlignment = "Center" Width = "300" FontSize = "20"></TextBlock>
@@ -35,7 +45,7 @@
                 <RadioButton Content = "по убыванию стоимости" Name = "RButtonDown" GroupName = "Sort" Width = "250" Checked = "RButtonDown_Checked" FontSize = "15"></RadioButton>
             </StackPanel>
         </WrapPanel>
-        <TextBlock Name = "SearchResultTB" Text = "" Grid.Column = "0" Grid.Row = "0" FontSize = "15" HorizontalAlignment = "Left" VerticalAlignment = "Center"/>
+        <TextBlock Name = "SearchResultTB" Text = "" Grid.Column = "0" Grid.Row = "1" FontSize = "15" HorizontalAlignment = "Left" VerticalAlignment = "Center"/>
         <ListView Name="ProductListView" Grid.Row="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -67,7 +77,7 @@
                         <TextBlock Text="{Binding ProductDescription}" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" FontSize="20"></TextBlock>
                         <TextBlock Text="{Binding ProductCost, StringFormat={}{0:0} рублей}" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" FontSize="20"></TextBlock>
                         <TextBlock Text="{Binding ProductManufacturer}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20"></TextBlock>
-                        
+
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
