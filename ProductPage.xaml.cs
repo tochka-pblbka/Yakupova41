@@ -34,16 +34,63 @@ namespace Yakupova41
 
         private void TBSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-
-        }
-
-        private void TBSearch_TextChanged_1(object sender, TextChangedEventArgs e)
-        {
-
+            UpdateService();
         }
 
         private void ComboType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            UpdateService();
+        }
+
+        private void RButtonDown_Checked(object sender, RoutedEventArgs e)
+        {
+            UpdateService();
+        }
+
+        private void RButtonUp_Checked(object sender, RoutedEventArgs e)
+        {
+            UpdateService();
+        }
+        private void UpdateService()
+        {
+
+            var currentProducts = Yakupova41Entities.GetContext().Product.ToList();
+            var raw_products_count = currentProducts.Count;
+
+            if (TBSearch.Text.Length > 0)
+                currentProducts = currentProducts.Where(p => p.ProductName.ToLower().Contains(TBSearch.Text.ToLower())).ToList();
+
+            if (ComboType.SelectedIndex == 0)
+            {
+                currentProducts = currentProducts.Where(p => (Convert.ToInt32(p.ProductDiscountAmount) >= 0 && (Convert.ToInt32(p.ProductDiscountAmount)) <= 100)).ToList();
+            }
+            if (ComboType.SelectedIndex == 1)
+            {
+                currentProducts = currentProducts.Where(p => (Convert.ToInt32(p.ProductDiscountAmount) > 0 && (Convert.ToInt32(p.ProductDiscountAmount)) <= 9.99)).ToList();
+            }
+            if (ComboType.SelectedIndex == 2)
+            {
+                currentProducts = currentProducts.Where(p => (Convert.ToInt32(p.ProductDiscountAmount) > 9.99 && (Convert.ToInt32(p.ProductDiscountAmount)) <= 14.99)).ToList();
+            }
+            if (ComboType.SelectedIndex == 3)
+            {
+                currentProducts = currentProducts.Where(p => (Convert.ToInt32(p.ProductDiscountAmount) > 15 && (Convert.ToInt32(p.ProductDiscountAmount)) <= 100)).ToList();
+            }
+
+            currentProducts = currentProducts.Where(p => p.ProductName.ToLower().Contains(TBSearch.Text.ToLower())).ToList();
+            SearchResultTB.Text = "кол-во " + Convert.ToString(currentProducts.Count) + " из " + Convert.ToString(raw_products_count);
+            
+            ProductListView.ItemsSource = currentProducts;
+            ProductListView.ItemsSource = currentProducts.ToList();
+
+            if (RButtonDown.IsChecked.Value)
+            {
+                ProductListView.ItemsSource = currentProducts.OrderByDescending(p => p.ProductCost).ToList();
+            }
+            if (RButtonUp.IsChecked.Value)
+            {
+                ProductListView.ItemsSource = currentProducts.OrderBy(p => p.ProductCost).ToList();
+            }
 
         }
     }
