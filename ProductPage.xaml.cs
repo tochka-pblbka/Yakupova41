@@ -28,7 +28,7 @@ namespace Yakupova41
             if (user.UserRole == 0) 
             {
                 fioTB.Text = "Гость";
-                RoleTB.Text = "Гость";
+                RoleTB.Text = "ффффф как тебя написать господи помоги";
 
                
             }
