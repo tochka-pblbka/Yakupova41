@@ -20,6 +20,9 @@ namespace Yakupova41
     /// </summary>
     public partial class ProductPage : Page
     {
+        List<OrderProduct> selectedOrderProducts = new List<OrderProduct>();
+        List<Product> selectedProducts = new List<Product>();
+         int newOrderID = 0;
         public ProductPage(User user)
         {
             InitializeComponent();
@@ -49,6 +52,9 @@ namespace Yakupova41
             ComboType.SelectedIndex = 0;
 
             UpdateService();
+
+            var Orders = Yakupova41Entities.GetContext().Order.ToList();
+            newOrderID = Orders.Count + 1;
         }
 
         
@@ -136,10 +142,17 @@ namespace Yakupova41
                 var newOrderProd = new OrderProduct();
                 newOrderProd.OrderID = newOrderID;
                 newOrderProd.ProductArticleNumber = prod.ProductArticleNumber;
-                newOrderProd.Quantity = 1;
+                newOrderProd.OrderProductCount = 1;
 
                 var selOp = selectedOrderProducts.Where(prod => Equals(p.ProductArticleNumber, prod.ProductArticleNumber));
             }
+        }
+
+        private void order_Click(object sender, RoutedEventArgs e)
+        {
+            selectedProducts = selectedProducts.Distinct().ToList();
+            OrderWindow orderWindow = new OrderWindow(selectedOrderProducts, selectedProducts, fioTB.Text);
+            orderWindow.ShowDialog();
         }
     }
 }

@@ -11,7 +11,7 @@
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="45"></RowDefinition>
-            <RowDefinition Height="45"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
             <RowDefinition Height="150"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
@@ -26,9 +26,9 @@
         <TextBlock Text="Дата доставки заказа" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15"></TextBlock>
         <DatePicker Grid.Column="1" Grid.Row="1"  FontSize="15" Name="DeliveryDate"></DatePicker>
         <TextBlock Text="ФИО клиента" Grid.Row="2" Grid.Column="0" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-        <TextBox Name="ClientTB" Grid.Row="2" Grid.Column="1" FontSize="15" Text="{Binding User}"></TextBox>
+        <TextBlock Name="ClientFIO" Grid.Row="2" Grid.Column="1" FontSize="15" Text="{Binding User}"></TextBlock>
         <TextBlock Text="Номер заказа" Grid.Row="3" Grid.Column="0" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-        <TextBox Name="OrderTB" Grid.Row="3" Grid.Column="1" FontSize="15"></TextBox>
+        <TextBlock   Name="OrderNumber" Grid.Row="3" Grid.Column="1" FontSize="15"></TextBlock>
 
         <ListView Name="ProductListView" Grid.Row="4" SelectionChanged="ProductListView_SelectionChanged" Grid.ColumnSpan="2">
             <ListView.ItemTemplate>
@@ -66,6 +66,9 @@
             </DataTemplate>
         </ListView.ItemTemplate>
         </ListView>
-
+        <TextBlock Text="Пункт выдачи" Grid.Column="0" Grid.Row="5" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <ComboBox Name="PickupCombo" Grid.Column="1" Grid.Row="5"></ComboBox>
+        <Button Content="Сохранить" Name="Save" Click="Save_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="6" ></Button>
+        
     </Grid>
 </Window>

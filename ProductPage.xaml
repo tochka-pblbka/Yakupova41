@@ -51,6 +51,7 @@
             <ListView.ContextMenu>
                 <ContextMenu>
                 <MenuItem Header="Добавить к заказу" Click="MenuItem_Click"></MenuItem>
+                    <Button Content="Заказать" Name="order" Click="order_Click" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"></Button>
                 </ContextMenu>
             </ListView.ContextMenu>
             
