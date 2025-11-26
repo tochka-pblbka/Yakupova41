@@ -46,7 +46,14 @@
             </StackPanel>
         </WrapPanel>
         <TextBlock Name = "SearchResultTB" Text = "" Grid.Column = "0" Grid.Row = "1" FontSize = "15" HorizontalAlignment = "Left" VerticalAlignment = "Center"/>
-        <ListView Name="ProductListView" Grid.Row="2">
+        <ListView Name="ProductListView" Grid.Row="2" SelectionChanged="ProductListView_SelectionChanged">
+
+            <ListView.ContextMenu>
+                <ContextMenu>
+                <MenuItem Header="Добавить к заказу" Click="MenuItem_Click"></MenuItem>
+                </ContextMenu>
+            </ListView.ContextMenu>
+            
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>

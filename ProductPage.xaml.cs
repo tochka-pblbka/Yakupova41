@@ -120,5 +120,26 @@ namespace Yakupova41
             }
 
         }
+
+        private void ProductListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            if(ProductListView.SelectedIndex>=0)
+            {
+                var prod = ProductListView.SelectedItem as Product;
+                selectedProducts.Add(prod);
+
+                var newOrderProd = new OrderProduct();
+                newOrderProd.OrderID = newOrderID;
+                newOrderProd.ProductArticleNumber = prod.ProductArticleNumber;
+                newOrderProd.Quantity = 1;
+
+                var selOp = selectedOrderProducts.Where(prod => Equals(p.ProductArticleNumber, prod.ProductArticleNumber));
+            }
+        }
     }
 }
