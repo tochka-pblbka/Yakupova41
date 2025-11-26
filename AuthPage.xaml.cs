@@ -67,6 +67,10 @@ namespace Yakupova41
                 if (CaptchaTB.Text != currentCaptcha)
                 {
                     MessageBox.Show("Неверная капча");
+                    Enter.IsEnabled = false;
+                    await Task.Delay(10000);
+                    Enter.IsEnabled = true;
+                  
                     GenerateCaptcha();
                     return;
                 }
