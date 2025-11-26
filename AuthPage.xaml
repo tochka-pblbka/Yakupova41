@@ -13,6 +13,7 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -27,13 +28,20 @@
         <Button Name="LikeGuest" Click="LikeGuest_Click" Content ="Войти как гость" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"></Button>
         <Button Name="Enter" Click="Enter_Click" Content ="Войти" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"></Button>
 
-
-        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
-            <TextBlock Name="captchaOneWord" FontSize="22" Margin="30, 0, 0, 0"></TextBlock>
-            <TextBlock Name="captchaTwoWord" FontSize="22" TextDecorations="Strikethrough"></TextBlock>
-            <TextBlock Name="captchaThreeWord" FontSize="22" TextDecorations="Strikethrough"></TextBlock>
-            <TextBlock Name="captchaFourWord" FontSize="22" TextDecorations="Strikethrough"></TextBlock>
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Name="CaptchaPanel" Visibility="Collapsed">
+            <TextBlock Name="captchaOneWord" FontSize="22" Margin="30,0,0,0" Foreground="Black"></TextBlock>
+            <TextBlock Name="captchaTwoWord" FontSize="22" TextDecorations="Strikethrough" Foreground="Black" Margin="10,10,0,0"></TextBlock>
+            <TextBlock Name="captchaThreeWord" FontSize="22" TextDecorations="Strikethrough" Foreground="Black" Margin="10,-10,0,0"></TextBlock>
+            <TextBlock Name="captchaFourWord" FontSize="22" TextDecorations="Strikethrough" Foreground="Black" Margin="10,5,0,0"></TextBlock>
         </StackPanel>
-        
+
+        <TextBox Grid.Row="3" Grid.ColumnSpan="2" 
+                 Text="" Name="CaptchaTB"
+                 Width="200"
+                 VerticalAlignment="Center" 
+                 HorizontalAlignment="Center"
+                 Margin="10"
+                 Visibility="Collapsed"/>
+
     </Grid>
 </Page>

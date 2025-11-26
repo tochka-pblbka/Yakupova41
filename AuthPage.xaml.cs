@@ -20,6 +20,8 @@ namespace Yakupova41
     /// </summary>
     public partial class AuthPage : Page
     {
+        private int failedAttempts = 0;
+        private string currentCaptcha = "";
         public AuthPage()
         {
             InitializeComponent();
@@ -27,25 +29,30 @@ namespace Yakupova41
 
         private void LikeGuest_Click(object sender, RoutedEventArgs e)
         {
-           
-            User guestUser = new User
-            {
-                UserID = 0,
-                UserSurname = "Гость",
-                UserName = "",
-                UserPatronymic = "",
-                UserRole = 0
-            };
 
-          
-            Manager.MainFrame.Navigate(new ProductPage(guestUser));
-
-            
-            LoginTB.Text = "";
-            PassTB.Text = "";
+            Manager.MainFrame.Navigate(new ProductPage(null));
         }
 
-        private void Enter_Click(object sender, RoutedEventArgs e)
+        private void GenerateCaptcha()
+        {
+            Random random = new Random();
+            string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            currentCaptcha = new string(Enumerable.Repeat(chars, 4)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+
+            captchaOneWord.Text = currentCaptcha[0].ToString();
+            captchaTwoWord.Text = currentCaptcha[1].ToString();
+            captchaThreeWord.Text = currentCaptcha[2].ToString();
+            captchaFourWord.Text = currentCaptcha[3].ToString();
+
+            CaptchaPanel.Visibility = Visibility.Visible;
+            CaptchaTB.Visibility = Visibility.Visible;
+            CaptchaTB.Text = "";
+        }
+
+
+
+        private async void Enter_Click(object sender, RoutedEventArgs e)
         {
             string login = LoginTB.Text;
             string password = PassTB.Text;
@@ -55,19 +62,42 @@ namespace Yakupova41
                 return;
             }
 
+            if (failedAttempts > 0)
+            {
+                if (CaptchaTB.Text != currentCaptcha)
+                {
+                    MessageBox.Show("Неверная капча");
+                    GenerateCaptcha();
+                    return;
+                }
+            }
+
+
             User user = Yakupova41Entities.GetContext().User.ToList().Find(p => p.UserLogin == login && p.UserPassword == password);
             if (user != null)
             {
                 Manager.MainFrame.Navigate(new ProductPage(user));
                 LoginTB.Text = "";
                 PassTB.Text = "";
+                failedAttempts = 0;
+                CaptchaPanel.Visibility = Visibility.Collapsed;
+                CaptchaTB.Visibility = Visibility.Collapsed;
             }
             else
             {
+                failedAttempts++;
                 MessageBox.Show("Введены неверные данные");
-                LoginTB.IsEnabled = false;
-
-                Enter.IsEnabled = true;
+                if (failedAttempts == 1)
+                {
+                    GenerateCaptcha();
+                }
+                else if (failedAttempts > 1)
+                {
+                    Enter.IsEnabled = false;
+                    await Task.Delay(10000);
+                    Enter.IsEnabled = true;
+                    GenerateCaptcha();
+                }
             }
 
         }

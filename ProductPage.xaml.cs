@@ -24,13 +24,11 @@ namespace Yakupova41
         {
             InitializeComponent();
 
-         
-            if (user.UserRole == 0) 
+
+            if (user == null)
             {
                 fioTB.Text = "Гость";
-                RoleTB.Text = "ффффф как тебя написать господи помоги";
-
-               
+                RoleTB.Text = "Гость";
             }
             else
             {
@@ -40,21 +38,26 @@ namespace Yakupova41
                     case 1:
                         RoleTB.Text = "Клиент"; break;
                     case 2:
-                        RoleTB.Text = "Менеджер"; break;
+                        RoleTB.Text = "Менджер"; break;
                     case 3:
                         RoleTB.Text = "Администратор"; break;
                 }
             }
-
             var currentProducts = Yakupova41Entities.GetContext().Product.ToList();
             ProductListView.ItemsSource = currentProducts;
+
+            ComboType.SelectedIndex = 0;
+
+            UpdateService();
         }
+
+        
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Manager.MainFrame.Navigate(new AddEdit());
         }
-}
+
 
         private void TBSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
